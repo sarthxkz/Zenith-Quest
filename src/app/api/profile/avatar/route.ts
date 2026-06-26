@@ -1,4 +1,4 @@
-import { currentUser } from '@clerk/nextjs/server';
+import { auth } from '@clerk/nextjs/server';
 import dbConnect from '@/lib/dbConnect';
 import User from '@/lib/models/User';
 
@@ -11,11 +11,11 @@ export async function POST(request: Request) {
     let clerkId = 'mock_user_id';
 
     if (isClerkConfigured) {
-      const user = await currentUser();
-      if (!user) {
+      const { userId } = await auth();
+      if (!userId) {
         return Response.json({ error: 'Unauthorized' }, { status: 401 });
       }
-      clerkId = user.id;
+      clerkId = userId;
     }
 
     const formData = await request.formData();

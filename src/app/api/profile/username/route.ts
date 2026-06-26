@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server';
-import { currentUser } from '@clerk/nextjs/server';
+import { auth } from '@clerk/nextjs/server';
 import dbConnect from '@/lib/dbConnect';
 import User from '@/lib/models/User';
 
@@ -25,9 +25,9 @@ export async function GET(request: NextRequest) {
     const isClerkConfigured = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && !!process.env.CLERK_SECRET_KEY;
     let currentClerkId = 'mock_user_id';
     if (isClerkConfigured) {
-      const user = await currentUser();
-      if (user) {
-        currentClerkId = user.id;
+      const { userId } = await auth();
+      if (userId) {
+        currentClerkId = userId;
       }
     }
 

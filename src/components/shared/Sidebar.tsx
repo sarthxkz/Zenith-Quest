@@ -136,10 +136,16 @@ export default function Sidebar() {
       {/* Sidebar */}
       <aside
         className={`
-          fixed left-0 top-0 h-full w-64 glass border-r border-white/5 z-40 flex flex-col py-6 px-4
+          fixed left-0 top-0 h-full w-64 border-r border-white/[0.06] z-40 flex flex-col py-6 px-4
           transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]
           ${isMobile ? (isOpen ? 'translate-x-0' : '-translate-x-full') : 'translate-x-0'}
         `}
+        style={{
+          background: 'linear-gradient(180deg, rgba(2, 1, 14, 0.92) 0%, rgba(5, 3, 22, 0.95) 50%, rgba(2, 1, 14, 0.92) 100%)',
+          backdropFilter: 'blur(32px) saturate(150%)',
+          WebkitBackdropFilter: 'blur(32px) saturate(150%)',
+          boxShadow: 'inset -1px 0 0 rgba(124, 58, 237, 0.06), 4px 0 30px rgba(0, 0, 0, 0.4)',
+        }}
       >
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 px-3 mb-8 group" id="sidebar-logo">
@@ -211,6 +217,36 @@ export default function Sidebar() {
               </div>
             )}
           </div>
+        </div>
+
+        {/* Sidebar Footer Details */}
+        <div className="mt-4 text-center space-y-1 px-1">
+          <p className="text-[9px] text-slate-500 leading-snug">
+            © {new Date().getFullYear()} Zenith Quest — Your Personal Sky Guide
+          </p>
+          <p className="text-[9px] text-slate-400 font-mono leading-snug">
+            Made with 🌌 by{' '}
+            <a
+              href="https://github.com/sarthxkz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-purple-400 hover:text-purple-300 transition-colors cursor-none"
+            >
+              Sarthak (@sarthxkz)
+            </a>{' '}
+            &{' '}
+            <a
+              href="https://github.com/KumariS0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cyan-400 hover:text-cyan-300 transition-colors cursor-none"
+            >
+              Shilpi (@KumariS0)
+            </a>
+          </p>
+          <p className="text-[8px] text-slate-600 leading-none mt-0.5">
+            Powered by NASA, AstronomyAPI, N2YO & OpenAI
+          </p>
         </div>
       </aside>
     </>

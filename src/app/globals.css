@@ -559,3 +559,203 @@ button:focus-visible,
   opacity: 1;
   pointer-events: auto;
 }
+
+/* === PROFILE PAGE PREMIUM STYLES === */
+
+/* Animated rotating gradient ring around the avatar */
+@keyframes avatar-ring-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.profile-avatar-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  padding: 3px;
+  background: conic-gradient(
+    from 0deg,
+    #7c3aed,
+    #06b6d4,
+    #ec4899,
+    #f59e0b,
+    #22c55e,
+    #3b82f6,
+    #7c3aed
+  );
+  animation: avatar-ring-spin 6s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.8;
+  will-change: transform;
+}
+
+/* Avatar upload hover overlay */
+.avatar-upload-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  z-index: 10;
+}
+.avatar-upload-wrapper:hover .avatar-upload-overlay {
+  opacity: 1;
+}
+
+/* Floating particles on banner */
+@keyframes banner-particle-float {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.4; }
+  25% { transform: translateY(-12px) translateX(6px) scale(1.2); opacity: 0.8; }
+  50% { transform: translateY(-20px) translateX(-4px) scale(1); opacity: 0.5; }
+  75% { transform: translateY(-8px) translateX(8px) scale(0.8); opacity: 0.7; }
+}
+@keyframes banner-particle-float-alt {
+  0%, 100% { transform: translateY(0) translateX(0) scale(0.8); opacity: 0.3; }
+  33% { transform: translateY(-15px) translateX(-8px) scale(1.1); opacity: 0.6; }
+  66% { transform: translateY(-5px) translateX(10px) scale(0.9); opacity: 0.5; }
+}
+
+.banner-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  animation: banner-particle-float 4s ease-in-out infinite;
+  pointer-events: none;
+}
+.banner-particle:nth-child(2n) {
+  animation: banner-particle-float-alt 5s ease-in-out infinite;
+  animation-delay: -1.5s;
+  width: 2px;
+  height: 2px;
+}
+.banner-particle:nth-child(3n) {
+  animation-duration: 6s;
+  animation-delay: -3s;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* Profile skeleton shimmer */
+@keyframes profile-skeleton-shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.profile-skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(124, 58, 237, 0.03) 0%,
+    rgba(124, 58, 237, 0.08) 40%,
+    rgba(6, 182, 212, 0.06) 60%,
+    rgba(124, 58, 237, 0.03) 100%
+  );
+  background-size: 800px 100%;
+  animation: profile-skeleton-shimmer 1.8s ease-in-out infinite;
+  border-radius: 12px;
+}
+
+/* Preset color swatch buttons */
+.color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+.color-swatch:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 12px currentColor;
+}
+.color-swatch.color-swatch-active {
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 16px currentColor;
+  transform: scale(1.1);
+}
+
+/* Rich bio textarea */
+.bio-textarea {
+  resize: none;
+  min-height: 80px;
+  max-height: 200px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  line-height: 1.7;
+  font-size: 13px;
+}
+.bio-textarea:focus {
+  border-color: rgba(124, 58, 237, 0.5);
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.1), inset 0 0 20px rgba(124, 58, 237, 0.03);
+}
+
+/* Profile section collapse/expand */
+.profile-section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+.profile-section-header:hover {
+  color: #c4b5fd;
+}
+
+/* Stat orb gradient background */
+@keyframes stat-orb-pulse {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.25; }
+}
+.stat-orb-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0.15;
+  animation: stat-orb-pulse 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Profile input focus glow */
+.profile-input {
+  background: rgba(3, 0, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #e2e8f0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+  outline: none;
+}
+.profile-input:focus {
+  border-color: rgba(124, 58, 237, 0.45);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.08), 0 0 20px rgba(124, 58, 237, 0.06);
+}
+.profile-input::placeholder {
+  color: rgba(148, 163, 184, 0.4);
+}
+
+/* Rank glow badge */
+@keyframes rank-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(124, 58, 237, 0.4); }
+  50% { box-shadow: 0 0 16px rgba(124, 58, 237, 0.7), 0 0 30px rgba(6, 182, 212, 0.2); }
+}
+.rank-badge-glow {
+  animation: rank-glow 3s ease-in-out infinite;
+}

@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useRef } from 'react';
+import { ReactNode, useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 interface GlassCardProps {
@@ -13,6 +13,14 @@ interface GlassCardProps {
 
 export default function GlassCard({ children, className = '', hover = true, glow = false, onClick }: GlassCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(true);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const mediaQuery = window.matchMedia('(pointer: fine)');
+      setIsMobile(!mediaQuery.matches);
+    }
+  }, []);
 
   // Normal relative coordinates of mouse (-0.5 to 0.5)
   const x = useMotionValue(0);
@@ -52,13 +60,13 @@ export default function GlassCard({ children, className = '', hover = true, glow
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
       style={{
-        rotateX: hover ? rotateX : 0,
-        rotateY: hover ? rotateY : 0,
+        rotateX: hover && !isMobile ? rotateX : 0,
+        rotateY: hover && !isMobile ? rotateY : 0,
         transformStyle: 'preserve-3d',
         perspective: 1000,
       }}
       className={`
-        ${hover ? 'glass-card cursor-none' : 'glass-card-static'} 
+        ${hover && !isMobile ? 'glass-card cursor-none' : 'glass-card-static'} 
         ${glow ? 'animate-pulse-glow' : ''} 
         relative overflow-hidden p-5 sm:p-6 flex flex-col ${className}
       `}
